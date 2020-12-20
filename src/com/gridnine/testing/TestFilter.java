@@ -88,19 +88,19 @@ public class TestFilter {
     @Test
     public void moreOnGroundTest() {
         Assert.assertEquals(flightList3.toString(), new FlightFilter(flightList3)
-                .onGroundMoreOrLess(1l, true).toString());
+                .timeOnGround(1l, true).toString());
     }
 
     @Test
     public void lessOnGroundTest() {
         Assert.assertEquals(resultFlightList4.toString(), new FlightFilter(resultFlightList4)
-                .onGroundMoreOrLess(2l, false).toString());
+                .timeOnGround(2l, false).toString());
     }
 
     @Test
     public void maxOnGroundTest() {
-        Assert.assertEquals(flightLongMap.toString(), new FlightFilter(resultFlightList3)
-                .maxOnGround().toString());
+        Assert.assertEquals(flightLongMap.toString(), FlightFilter
+                .timeOnGround(resultFlightList3).toString());
     }
 
 }

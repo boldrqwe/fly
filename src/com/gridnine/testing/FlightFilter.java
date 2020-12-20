@@ -42,7 +42,7 @@ public class FlightFilter {
     }
 
 
-    Map<Flight, Long> maxOnGround() {
+    public static Map<Flight, Long> timeOnGround(List<Flight> flightList) {
         Long duration = 0l;
         Map<Flight, Long> result = new LinkedHashMap<>();
         for (Flight flight : flightList) {
@@ -63,18 +63,18 @@ public class FlightFilter {
     }
 
 
-    public List<Flight> onGroundMoreOrLess(Long ours, boolean moreOrLess) {
-        Map<Flight, Long> maxOnGround = maxOnGround();
+    public List<Flight> timeOnGround(Long hours, boolean moreOrLess) {
+        Map<Flight, Long> groundTimeMap = timeOnGround(flightList);
         Map<Flight, Long> resultMap = new LinkedHashMap<>();
         if (moreOrLess == true) {
-            maxOnGround.forEach((flight, aLong) -> {
-                if (aLong.compareTo(ours) >= 0) {
+            groundTimeMap.forEach((flight, aLong) -> {
+                if (aLong.compareTo(hours) >= 0) {
                     resultMap.put(flight, aLong);
                 }
             });
         } else {
-            maxOnGround.forEach((flight, aLong) -> {
-                if (aLong.compareTo(ours) <= 0) {
+            groundTimeMap.forEach((flight, aLong) -> {
+                if (aLong.compareTo(hours) <= 0) {
                     resultMap.put(flight, aLong);
                 }
             });
@@ -82,6 +82,7 @@ public class FlightFilter {
         List<Flight> result = new ArrayList<>(resultMap.keySet());
         return result;
     }
+
 }
 
 
